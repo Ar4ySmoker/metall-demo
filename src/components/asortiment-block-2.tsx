@@ -1,16 +1,7 @@
-import {
-  BookCheck,
-  ChartPie,
-  FolderSync,
-  Goal,
-  Users,
-  Zap,
-} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card } from "./ui/card";
-import { TextAnimate } from "./magicui/text-animate";
-import { SparklesText } from "./magicui/sparkles-text";
+
 import { AuroraText } from "./magicui/aurora-text";
 
 const catalog = [

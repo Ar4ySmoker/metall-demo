@@ -35,7 +35,7 @@ interface ShinyButtonProps
 export const ShinyButton = React.forwardRef<
   HTMLButtonElement,
   ShinyButtonProps
->(({ children, className, ...props }, ref) => {
+>(({ children, className, ...props }) => {
   return (
     <motion.div
       // ref={ref}

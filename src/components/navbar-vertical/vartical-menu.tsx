@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { asortimentWithSubcategories } from "../navbar-02/config";
-import { ArrowBigRight, ArrowRight, ChevronRight } from "lucide-react";
+import {  ChevronRight } from "lucide-react";
 
 export const VerticalMenu = () => {
   const [activeGroup, setActiveGroup] = useState<string | null>(null);

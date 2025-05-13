@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { NavigationMenuLink } from "@/components/ui/navigation-menu";
-import { cn } from "@/lib/utils";
 import { asortiment } from "./config";
 
 

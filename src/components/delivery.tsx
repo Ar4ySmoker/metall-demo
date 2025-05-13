@@ -13,7 +13,6 @@ import {
   Zap,
 } from "lucide-react";
 import Image from "next/image";
-import { AspectRatio } from "./ui/aspect-ratio";
 
 const features = [
   {

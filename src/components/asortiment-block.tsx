@@ -4,7 +4,7 @@ import Link from "next/link";
 export const AsortimentBlock = () => {
   // Группируем ассортимент, как в предыдущем примере
   type GroupType = { type: "group"; title: string; image?: string };
-  type ItemType = { type: "item"; title: string; [key: string]: any };
+  type ItemType = { type: "item"; title: string; [key: string]: string };
   type Grouped = { group: GroupType; items: ItemType[] };
 
   const groupedAsortiment = asortiment.reduce<Grouped[]>((acc, item) => {

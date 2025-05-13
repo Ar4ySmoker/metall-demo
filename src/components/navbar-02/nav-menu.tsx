@@ -15,7 +15,6 @@ import Link from "next/link";
 import React from "react";
 // import { asortiment } from "./config";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import { AsortimentGrid } from "./AsortimentGrid";
 import { ShinyButton } from "../magicui/shiny-button";
 import { ShimmerButton } from "../magicui/shimmer-button";
