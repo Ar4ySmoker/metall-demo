@@ -1,6 +1,6 @@
 import { NavMenu } from "./nav-menu";
 
-const NavbarVertical = () => {
+const Navbar03 = () => {
   return (
     <div className=" bg-muted">
       <nav className="h-16 bg-background border-b">
@@ -12,4 +12,4 @@ const NavbarVertical = () => {
   );
 };
 
-export default NavbarVertical;
+export default Navbar03;

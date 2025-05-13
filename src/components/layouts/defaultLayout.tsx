@@ -1,13 +1,30 @@
-import NavbarVertical from "../navbar-vertical/navbar-verticat";
 import { VerticalMenu } from "../navbar-vertical/vartical-menu";
 
-const DefaultLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
+const DefaultLayout = ({
+  children,
+  showSidebar = true,
+}: {
+  children: React.ReactNode;
+  showSidebar?: boolean;
+}) => {
   return (
-    <div>
-      <VerticalMenu />
-      {children}
+    <div className="max-w-screen-xl mt-4 mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex gap-6">
+        {/* Левая колонка — меню */}
+        {showSidebar && (
+          <div className="w-70 flex-shrink-0">
+            <VerticalMenu />
+          </div>
+        )}
+
+        {/* Правая колонка — контент */}
+        <div className={showSidebar ? "flex-1" : "w-full"}>
+          {children}
+        </div>
+      </div>
     </div>
   );
 };
 
 export default DefaultLayout;
+

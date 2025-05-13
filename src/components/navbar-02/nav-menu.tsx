@@ -17,13 +17,17 @@ import React from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { AsortimentGrid } from "./AsortimentGrid";
+import { ShinyButton } from "../magicui/shiny-button";
+import { ShimmerButton } from "../magicui/shimmer-button";
 
 export const NavMenu = (props: NavigationMenuProps) => (
   <NavigationMenu {...props}>
-    <NavigationMenuList className="flex justify-around items-center gap-5 ">
-      <NavigationMenuItem>
-        <NavigationMenuTrigger className="text-[15px] font-normal bg-red-500 text-white">
-          Каталог товаров
+    <NavigationMenuList className="h-full grid grid-cols-8 gap-5 data-[orientation=horizontal]">
+      <NavigationMenuItem className="col-span-2">
+        <NavigationMenuTrigger className="text-[15px] w-full font-normal bg-accent text-white">
+          <ShinyButton>
+            <span className="text-white">Каталог товаров</span>
+          </ShinyButton>
         </NavigationMenuTrigger>
        <NavigationMenuContent>
     <AsortimentGrid/>
@@ -33,11 +37,11 @@ export const NavMenu = (props: NavigationMenuProps) => (
 
       </NavigationMenuItem>
 
-      <NavigationMenuItem>
-        <div className="relative hidden md:block">
+      <NavigationMenuItem className="col-span-2">
+        <div className=" relative hidden md:block">
               <Search className="h-5 w-5 absolute inset-y-0 my-auto left-2.5" />
               <Input
-                className="pl-10 flex-1 bg-white dark:bg-slate-800 border-none shadow-none w-[280px] rounded-full"
+                className="pl-10 flex-1 bg-white dark:bg-slate-800 border-none shadow-none  rounded-full"
                 placeholder="Поиск"
               />
             </div>
@@ -79,8 +83,11 @@ export const NavMenu = (props: NavigationMenuProps) => (
         </NavigationMenuLink>
       </NavigationMenuItem>
 
-       <NavigationMenuItem >
-      <Button variant='destructive'>Расширить заказ</Button>
+       <NavigationMenuItem className="col-start-8 justify-self-end">
+     
+        <ShimmerButton background='#8C2641' borderRadius='10px' className="shadow-2xl">
+        Рассчитать заказ
+        </ShimmerButton>
       </NavigationMenuItem>
     </NavigationMenuList>
   </NavigationMenu>

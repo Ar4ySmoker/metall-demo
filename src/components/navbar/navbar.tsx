@@ -1,37 +1,41 @@
+'use client'
 import { Button } from "@/components/ui/button";
-import { Logo } from "./logo";
 import { NavMenu } from "./nav-menu";
 import { NavigationSheet } from "./navigation-sheet";
 import { MapPinIcon } from "lucide-react";
-import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
+import {  FaTelegram, FaWhatsapp, FaViber } from "react-icons/fa";
+import Image from "next/image";
+import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const Navbar = () => {
+    const [isNavVisible, setIsNavVisible] = useState(false);
+
   return (
-    <div className="w-full bg-muted">
-      <nav className="h-16 bg-blue-950 text-white border-b flex items-center">
+    <div className="w-full bg-secondary">
+      <button
+        onClick={() => setIsNavVisible(!isNavVisible)}
+        className="fixed top-2 right-4 z-50 p-2 bg-secondary text-white rounded-full shadow-md"
+      >
+        {isNavVisible ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+      </button>
+      <nav  className={`transition-all duration-300 bg-secondary text-white border-b ${
+          isNavVisible ? "h-16 opacity-100" : "h-0 opacity-0 overflow-hidden"
+        } flex items-center`}>
         <div className="h-full flex items-center justify-between max-w-screen-xl mx-auto px-4 sm: lg:px-8">
 
-          {/* Desktop Menu */}
           <NavMenu className="hidden md:block" />
 
-          {/* Mobile Menu */}
           <div className="md:hidden">
             <NavigationSheet />
           </div>
 
-          {/* <div className="flex items-center gap-3">
-            <Button variant="outline" className="hidden sm:inline-flex">
-              Sign In
-            </Button>
-            <Button>Get Started</Button>
-
-           
-          </div> */}
+          
         </div>
       </nav>
-      <div className="h-20 bg-color-primary border-b flex items-center">
+      <div className="h-20 bg-primary border-b flex items-center">
       <div className="h-full grid grid-cols-5 items-center justify-arround max-w-screen-xl mx-auto px-4 my-2 sm: lg:px-8">
-        <Logo />
+        <Image src="/logo.svg" alt="logo" width={124} height={32} className="rounded" />
         <div className="flex flex-col items-center justify-center text-md font-bold">
           <div className="flex gap-2">
             <MapPinIcon />
@@ -48,29 +52,27 @@ const Navbar = () => {
         </div>
         <div className="flex flex-col items-center justify-center text-md font-bold">
           <ul className="flex items-center space-x-6 text-muted-foreground">
-              <li className="font-medium hover:text-primary">
+              <li className="font-medium text-accent hover:text-destructive">
                 <a href="#">
-                  <FaInstagram className="size-6" />
+                  <FaTelegram className="size-6" />
                 </a>
               </li>
-              <li className="font-medium hover:text-primary">
+              <li className="font-medium text-accent hover:text-destructive">
                 <a href="#">
-                  <FaFacebook className="size-6" />
+                  <FaWhatsapp className="size-6" />
                 </a>
               </li>
-              <li className="font-medium hover:text-primary">
+              <li className="font-medium text-accent hover:text-destructive">
                 <a href="#">
-                  <FaTwitter className="size-6" />
+                  <FaViber className="size-6" />
                 </a>
               </li>
-              <li className="font-medium hover:text-primary">
-                <a href="#">
-                  <FaLinkedin className="size-6" />
-                </a>
-              </li>
+              
             </ul>
         </div>
-        <Button variant="outline" size='lg'>Заказать Звонок</Button>
+          <div className="col-start-5 justify-self-end">
+        <Button variant="outline" size='sm' className="border-accent hover:bg-accent/10 hover:text-destructive">Заказать Звонок</Button>
+            </div>
       </div>
       </div>
     </div>

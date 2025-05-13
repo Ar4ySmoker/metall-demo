@@ -36,7 +36,7 @@ export const NavMenu = (props: NavigationMenuProps) => (
   <NavigationMenu {...props}>
     <NavigationMenuList className="flex justify-around items-center gap-5">
       <NavigationMenuItem>
-        <NavigationMenuTrigger className="text-[15px] font-normal bg-red-500 text-white">
+        <NavigationMenuTrigger className="text-[15px] font-normal bg-accent text-white hover:bg-accent/80 hover:text-destructive!"> 
           Каталог товаров
         </NavigationMenuTrigger>
         <NavigationMenuContent className="flex px-4 py-2 bg-white shadow-lg">
