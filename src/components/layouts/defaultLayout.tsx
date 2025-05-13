@@ -16,7 +16,6 @@ const DefaultLayout = ({
             <VerticalMenu />
           </div>
         )}
-
         <div className={showSidebar ? "flex-1" : "w-full"}>
           {children}
         </div>
