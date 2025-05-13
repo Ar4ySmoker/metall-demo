@@ -17,7 +17,6 @@ const DefaultLayout = ({
           </div>
         )}
 
-        {/* Правая колонка — контент */}
         <div className={showSidebar ? "flex-1" : "w-full"}>
           {children}
         </div>
