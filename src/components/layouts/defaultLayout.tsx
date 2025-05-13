@@ -12,7 +12,7 @@ const DefaultLayout = ({
       <div className="flex gap-6">
         {/* Левая колонка — меню */}
         {showSidebar && (
-          <div className="w-70 flex-shrink-0">
+          <div className="w-70 flex-shrink-0 hidden md:block">
             <VerticalMenu />
           </div>
         )}
