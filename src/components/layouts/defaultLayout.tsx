@@ -8,7 +8,7 @@ const DefaultLayout = ({
   showSidebar?: boolean;
 }) => {
   return (
-    <div className="max-w-screen-xl mt-4 mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-screen-xl mt-4 mx-auto px-4 sm:px-6 lg:px-8 xs:hidden">
       <div className="flex gap-6">
         {/* Левая колонка — меню */}
         {showSidebar && (

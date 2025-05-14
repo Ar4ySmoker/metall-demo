@@ -7,6 +7,8 @@ import DefaultLayout from "@/components/layouts/defaultLayout";
 import LogosPage from "@/components/logos/logos";
 import ProductsCard from "@/components/productsCard";
 
+
+
 export default function Home() {
   return (
     <>
@@ -41,6 +43,7 @@ export default function Home() {
       <LogosPage />
       <Avantages />
       <Contact02Page />
+      
     </>
   );
 }

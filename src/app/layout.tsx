@@ -3,6 +3,10 @@ import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import Navbar02 from "@/components/navbar-02/navbar-02";
 import Footer01Page from "@/components/footer-01/footer-01";
+import {
+  AlertDialog,
+  
+} from "@/components/ui/alert-dialog"
 
 
 
@@ -20,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body
      
-      >
+      ><AlertDialog>
           <nav >
               <Navbar />
           </nav>
@@ -30,7 +34,7 @@ export default function RootLayout({
         {children}
        
           <Footer01Page />
-        
+      </AlertDialog>  
       </body>
     </html>
   );

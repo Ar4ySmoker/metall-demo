@@ -1,14 +1,13 @@
 import React from "react";
 import { NumberTicker } from "./magicui/number-ticker";
 import { TypingAnimation } from "./magicui/typing-animation";
-import { FlipText } from "./magicui/flip-text";
 
 const Avantages = () => {
   return (
     <div className=" flex items-center justify-center">
       <div className="max-w-screen-xl mx-auto  text-center">
         <TypingAnimation className="text-4xl md:text-5xl font-semibold">Почему Металл Моссква?</TypingAnimation>
-        <FlipText className="mt-6 text-lg">Потому что работая с нами вы получите...</FlipText>
+        <p className="mt-6 text-lg max-w-sm">Потому что работая с нами вы получите...</p>
 
         <div className="mt-6 sm:mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-6 justify-center">
           <div className="max-w-[18ch]">

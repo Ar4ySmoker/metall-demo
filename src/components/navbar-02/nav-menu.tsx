@@ -16,80 +16,109 @@ import React from "react";
 // import { asortiment } from "./config";
 import { Input } from "../ui/input";
 import { AsortimentGrid } from "./AsortimentGrid";
-import { ShinyButton } from "../magicui/shiny-button";
 import { ShimmerButton } from "../magicui/shimmer-button";
+import { AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
+import { Textarea } from "../ui/textarea";
 
 export const NavMenu = (props: NavigationMenuProps) => (
-  <NavigationMenu {...props}>
+  <><NavigationMenu {...props}>
     <NavigationMenuList className="h-full grid grid-cols-8 gap-5 data-[orientation=horizontal]">
       <NavigationMenuItem className="col-span-2">
-        <NavigationMenuTrigger className="text-[15px] w-full font-normal bg-accent text-white">
-          <ShinyButton>
-            <span className="text-white">Каталог товаров</span>
-          </ShinyButton>
+        <NavigationMenuTrigger className=" w-max m-1 font-normal bg-accent text-white">
+          {/* <ShinyButton className="text-[15px] w-full font-normal bg-accent text-white"> */}
+            Каталог товаров
+          {/* </ShinyButton> */}
         </NavigationMenuTrigger>
-       <NavigationMenuContent>
-    <AsortimentGrid/>
-  
-</NavigationMenuContent>
+        <NavigationMenuContent>
+          <div className="h-[400px] sm:h-max overflow-y-auto">
+  <AsortimentGrid />
+</div>
+
+        </NavigationMenuContent>
 
 
       </NavigationMenuItem>
 
       <NavigationMenuItem className="col-span-2">
         <div className=" relative hidden md:block">
-              <Search className="h-5 w-5 absolute inset-y-0 my-auto left-2.5" />
-              <Input
-                className="pl-10 flex-1 bg-white dark:bg-slate-800 border-none shadow-none  rounded-full"
-                placeholder="Поиск"
-              />
-            </div>
+          <Search className="h-5 w-5 absolute inset-y-0 my-auto left-2.5" />
+          <Input
+            className="pl-10 flex-1 bg-white dark:bg-slate-800 border-none shadow-none  rounded-full"
+            placeholder="Поиск" />
+        </div>
       </NavigationMenuItem>
 
-      <NavigationMenuItem>
+      <NavigationMenuItem className="hidden md:block">
         <NavigationMenuLink asChild>
           <Link
             href="/"
-            
+
           >
             <div className="flex items-center gap-2">
 
-<ShoppingCart className="w-8! h-8! text-muted-foreground" />
-<div className="flex flex-col items-center justify-center">
-  <p className="text-md font-semibold">Корзина</p>
-  <p className="text-sm text-muted-foreground">0 р.</p>
-  </div>         
+              <ShoppingCart className="w-8! h-8! text-muted-foreground" />
+              <div className="flex flex-col items-center justify-center">
+                <p className="text-md font-semibold">Корзина</p>
+                <p className="text-sm text-muted-foreground">0 р.</p>
+              </div>
+            </div>
+          </Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem >
+
+      <NavigationMenuItem className="hidden md:block">
+        <NavigationMenuLink asChild>
+          <Link
+            href="/"
+
+          >
+            <div className="flex items-center gap-2">
+
+              <Heart className="w-8! h-8! text-muted-foreground" />
+              <div className="flex flex-col items-center justify-center">
+                <p className="text-md font-semibold">Избранное</p>
+                <p className="text-sm text-muted-foreground">0 товаров</p>
+              </div>
             </div>
           </Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
 
-       <NavigationMenuItem>
-        <NavigationMenuLink asChild>
-          <Link
-            href="/"
-            
-          >
-            <div className="flex items-center gap-2">
 
-<Heart className="w-8! h-8! text-muted-foreground" />
-<div className="flex flex-col items-center justify-center">
-  <p className="text-md font-semibold">Избранное</p>
-  <p className="text-sm text-muted-foreground">0 товаров</p>
-  </div>         
-            </div>
-          </Link>
-        </NavigationMenuLink>
-      </NavigationMenuItem>
-
-       <NavigationMenuItem className="col-start-8 justify-self-end">
-     
-        <ShimmerButton background='#8C2641' borderRadius='10px' className="shadow-2xl">
+      <AlertDialogTrigger className="col-start-8 justify-self-end" asChild>
+        <ShimmerButton background='#8C2641' shimmerSize='0.5em' borderRadius='10px' className=" text-sm w-35 h-9 m-1" >
         Рассчитать заказ
         </ShimmerButton>
-      </NavigationMenuItem>
+      </AlertDialogTrigger>
     </NavigationMenuList>
-  </NavigationMenu>
+  </NavigationMenu><AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle>Хотите расчитать заказ?</AlertDialogTitle>
+        <AlertDialogDescription>
+          Оставьте свои данные и мы с вами свяжемся для расчета заказа.
+        </AlertDialogDescription>
+      </AlertDialogHeader>
+      <form action="">
+        <Input
+          type="text"
+          placeholder="Ваше имя"
+          className="mb-4 w-full bg-white dark:bg-slate-800 border-none shadow-none  rounded-md"
+        />
+        <Input
+          type="text"
+          placeholder="Ваш телефон"
+          className="mb-4 w-full bg-white dark:bg-slate-800 border-none shadow-none  rounded-md"
+        />
+        <Textarea
+          placeholder="Ваш комментарий"
+          className="mb-4 w-full bg-white dark:bg-slate-800 border-none shadow-none  rounded-md"
+        />
+      </form>
+      <AlertDialogFooter>
+        <AlertDialogCancel className="ring-1 ring-accent/20 hover:ring-accent/40">Отмена</AlertDialogCancel>
+        <AlertDialogAction className="bg-accent text-white hover:bg-accent/80 ">Отправить</AlertDialogAction>
+      </AlertDialogFooter>
+    </AlertDialogContent></>
 );
 
 const ListItem = React.forwardRef<
