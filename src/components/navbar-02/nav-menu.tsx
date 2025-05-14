@@ -43,7 +43,7 @@ export const NavMenu = (props: NavigationMenuProps) => (
         <div className=" relative hidden md:block">
           <Search className="h-5 w-5 absolute inset-y-0 my-auto left-2.5" />
           <Input
-            className="pl-10 flex-1 bg-white dark:bg-slate-800 border-none shadow-none  rounded-full"
+            className="pl-10 flex-1 bg-white dark:bg-slate-800 border-none shadow-none  rounded-md"
             placeholder="Поиск" />
         </div>
       </NavigationMenuItem>
@@ -52,11 +52,11 @@ export const NavMenu = (props: NavigationMenuProps) => (
         <NavigationMenuLink asChild>
           <Link
             href="/"
-
+ className="flex items-center gap-2 p-2 rounded transition-colors hover:bg-accent/80 hover:text-white"
           >
             <div className="flex items-center gap-2">
 
-              <ShoppingCart className="w-8! h-8! text-muted-foreground" />
+              <ShoppingCart className="w-8! h-8! text-muted-foreground transition-colors" />
               <div className="flex flex-col items-center justify-center">
                 <p className="text-md font-semibold">Корзина</p>
                 <p className="text-sm text-muted-foreground">0 р.</p>
@@ -70,11 +70,11 @@ export const NavMenu = (props: NavigationMenuProps) => (
         <NavigationMenuLink asChild>
           <Link
             href="/"
-
+ className="flex items-center gap-2 p-2 rounded transition-colors hover:bg-accent/80 hover:text-white"
           >
             <div className="flex items-center gap-2">
 
-              <Heart className="w-8! h-8! text-muted-foreground" />
+              <Heart className="w-8! h-8! text-muted-foreground transition-colors" />
               <div className="flex flex-col items-center justify-center">
                 <p className="text-md font-semibold">Избранное</p>
                 <p className="text-sm text-muted-foreground">0 товаров</p>

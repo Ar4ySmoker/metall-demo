@@ -33,7 +33,7 @@ const Footer01Page = () => {
             ))}
           </div>
           <Separator className="w-full col-span-5 mx-auto" />
-          <div className="col-span-5 mx-auto py-5 flex justify-between">
+          <div className="col-span-5 mx-auto py-5 flex justify-between items-center">
             <Logo />
 
             <span className="text-primary/80 text-sm">

@@ -21,6 +21,7 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   contact: 'Контакты',
   armatura: 'Арматура',
   catalog: 'Каталог',
+  profnastil: 'Профнастил'
 }
 
 function formatLabel(segment: string) {
