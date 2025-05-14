@@ -6,7 +6,7 @@ import { AuroraText } from "./magicui/aurora-text";
 
 const catalog = [
   {
-    icon: "/images/armatura.jpg",
+    icon: "/images/armatura-a3.jpg",
     title: "Арматура",
     item: [
       { title: "Арматура А3 рифленая", href: "#" },
@@ -16,7 +16,7 @@ const catalog = [
     ],
   },
   {
-    icon: "/images/truba.jpg",
+    icon: "/images/armatura-a3.jpg",
     title: "Трубы профильные",
     item: [
       { title: "Квадратная", href: "#" },
@@ -26,16 +26,17 @@ const catalog = [
     ],
   },
   {
-    icon: "/images/truby.jpg",
+    icon: "/images/armatura-a3.jpg",
     title: "Трубы",
     item: [
       { title: "Труба ВГП", href: "#" },
       { title: "Оцинкованная", href: "#" },
       { title: "Электросварная", href: "#" },
+      { title: "Электросварная", href: "#" },
     ],
   },
   {
-    icon: "/images/fason.jpg",
+    icon: "/images/armatura-a3.jpg",
     title: "Фасонный прокат",
     item: [
       { title: "Балка двутавровая", href: "#" },
@@ -44,7 +45,7 @@ const catalog = [
     ],
   },
   {
-    icon: "/images/sort.jpg",
+    icon: "/images/armatura-a3.jpg",
     title: "Сортовой прокат",
     item: [
       { title: "Квадрат стальной", href: "#" },
@@ -53,7 +54,7 @@ const catalog = [
     ],
   },
   {
-    icon: "/images/setka.jpg",
+    icon: "/images/armatura-a3.jpg",
     title: "Сетка металлическая",
     item: [
       { title: "Сетка сварная в картах", href: "#" },
@@ -62,7 +63,7 @@ const catalog = [
     ],
   },
   {
-    icon: "/images/svai.jpg",
+    icon: "/images/armatura-a3.jpg",
     title: "Винтовые сваи",
     item: [
       { title: "Сваи винтовые 57", href: "#" },
@@ -72,7 +73,7 @@ const catalog = [
     ],
   },
   {
-    icon: "/images/dop.jpg",
+    icon: "/images/armatura-a3.jpg",
     title: "Доп. материалы",
     item: [
       { title: "Заглушки для труб", href: "#" },
@@ -83,7 +84,7 @@ const catalog = [
     ],
   },
   {
-    icon: "/images/zabor.jpg",
+    icon: "/images/armatura-a3.jpg",
     title: "Все для забора",
     item: [
       { title: "Профнастил крашеный", href: "#" },
@@ -106,6 +107,7 @@ const catalog = [
 
 
 const AsortimentBlock2 = () => {
+  
   return (
       <div className="max-w-screen-xl mx-auto w-full py-10 px-2">
         <AuroraText
@@ -115,43 +117,110 @@ const AsortimentBlock2 = () => {
           Ассортимент
         </AuroraText>
         <div className="mt-4 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-       {catalog.map((item) => (
-  <div key={item.title}>
-    <Card className="bg-accent/30 hover:ring rounded-lg p-4">
+  {/* {catalog.map((item) => {
+  const delay = (Math.random() * 4).toFixed(2);      
+  const duration = (4 + Math.random() * 4).toFixed(2); 
+
+  return (
+    <div key={item.title} className="relative">
+      <div
+        className="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent/10 rounded-md animate-pulse"
+        style={{
+          animationDelay: `${delay}s`,
+          animationDuration: `${duration}s`,
+          zIndex: -1, 
+        }}
+      ></div>
+
       
-      {/* Заголовок на всю ширину */}
-      <h3 className="font-semibold tracking-tight text-lg mb-4">
-        {item.title}
-      </h3>
+      <Card className="p-5 border relative bg-transparent dark:from-slate-900 dark:to-slate-700 rounded-md">
+        <h3 className="font-semibold tracking-tight text-lg mb-4">
+          {item.title}
+        </h3>
 
-      {/* Блок: картинка + список */}
-      <div className="flex items-start gap-4">
-        {/* Картинка слева */}
-        <Image
-          src={item.icon}
-          alt="icon"
-          width={100}
-          height={100}
-          className="h-24 w-24 rounded-lg bg-muted shrink-0"
-        />
+        <div className="flex items-start gap-4">
+          <Image
+            src={item.icon}
+            alt="icon"
+            width={100}
+            height={100}
+            className="h-24 w-24 rounded-lg bg-muted shrink-0"
+          />
 
-        {/* Список ссылок справа */}
-        <div className="space-y-2 text-sm text-muted-foreground">
-          {item.item.map((subItem, index) => (
-            <div key={index}>
-              <Link
-                href={subItem.href}
-                className="text-xs font-semibold tracking-tight text-muted-foreground hover:text-card-foreground hover:underline"
-              >
-                {subItem.title}
-              </Link>
-            </div>
-          ))}
+          <div className="space-y-2 text-sm text-muted-foreground">
+            {item.item.map((subItem, index) => (
+              <div key={index}>
+                <Link
+                  href={subItem.href}
+                  className="text-xs font-semibold tracking-tight text-muted-foreground hover:text-card-foreground hover:underline"
+                >
+                  {subItem.title}
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </Card>
-  </div>
-))}
+      </Card>
+    </div>
+  );
+})} */}
+{catalog.map((item) => {
+  
+
+  return (
+    <div key={item.title} className="relative overflow-hidden rounded-md">
+      {/* Фоновая картинка с размытой областью и градиентом прозрачности */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${item.icon})`,
+          filter: 'blur(10px)',
+          opacity: 0.3,
+          maskImage: 'linear-gradient(to right, black 40%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, black 40%, transparent 100%)',
+          zIndex: -1,
+        }}
+      ></div>
+
+      {/* Контент карточки */}
+      <Card className="p-5 border relative bg-transparent dark:from-slate-900 dark:to-slate-700 rounded-md">
+        {/* Заголовок на всю ширину */}
+        <h3 className="font-semibold tracking-tight text-lg mb-4">
+          {item.title}
+        </h3>
+
+        {/* Блок: картинка + список */}
+        <div className="grid grid-cols-2 gap-4">
+          {/* Картинка слева */}
+          <Image
+            src={item.icon}
+            alt="icon"
+            width={100}
+            height={100}
+            className="h-24 w-24 rounded-lg bg-muted shrink-0"
+          />
+
+          {/* Список ссылок справа */}
+          <div className="space-y-2 text-sm text-muted-foreground">
+            {item.item.map((subItem, index) => (
+              <div key={index}>
+                <Link
+                  href={subItem.href}
+                  className="text-md font-semibold tracking-tight text-muted-foreground hover:text-card-foreground hover:underline"
+                >
+                  {subItem.title}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+})}
+
+
+
         </div>
       </div>
   );

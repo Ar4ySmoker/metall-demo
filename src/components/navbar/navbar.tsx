@@ -32,7 +32,7 @@ const Navbar = () => {
 </nav>
 
 
-      <div className="h-20 bg-primary border-b flex items-center">
+      <div className="h-20 bg-primary border-b flex items-center md:px-35">
 <div className="h-full flex items-center justify-between max-w-screen-xl mx-auto px-4 my-2 w-full">
           <Image src="/logo.svg" alt="logo" width={124} height={32} className="rounded" />
           

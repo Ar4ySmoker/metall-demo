@@ -10,7 +10,8 @@ const ProductsCard = () => {
   
     return (
 <>
-<Card className="">
+
+<Card className="backdrop-blur-md bg-white/30 border border-white/20 rounded-xl p-6 shadow-lg">
 <CardHeader>
 <div className="flex items-start justify-between w-full">
 <div className="flex flex-col items-start gap-2">

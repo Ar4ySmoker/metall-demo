@@ -40,32 +40,32 @@ const data: Payment[] = [
   {
     id: "m5gr84i9",
     amount: 316,
-    status: "success",
-    email: "ken99@example.com",
+    l: "3 м",
+    name: "Арматура А3 А500С рифленая 6 мм.",
   },
   {
     id: "3u1reuv4",
     amount: 242,
-    status: "success",
-    email: "Abe45@example.com",
+    l: "6 м",
+    name: "Арматура А3 А500С рифленая 8 мм.",
   },
   {
     id: "derv1ws0",
     amount: 837,
-    status: "processing",
-    email: "Monserrat44@example.com",
+    l: "12 м",
+    name: "Арматура А3 А500С рифленая 10 мм.",
   },
   {
     id: "5kma53ae",
     amount: 874,
-    status: "success",
-    email: "Silas22@example.com",
+    l: "3 м",
+    name: "Арматура А3 А500С рифленая 12 мм.",
   },
   {
     id: "bhqecj4p",
     amount: 721,
-    status: "failed",
-    email: "carmella@example.com",
+    l: "н/м",
+    name: "Арматура А3 А500С рифленая 14 мм.",
   },
   
 ]
@@ -74,8 +74,8 @@ export type Payment = {
 
   id: string
   amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
+  l: "3 м" | "6 м" | "12 м" | "н/м"
+  name: string
 }
 
 export const columns: ColumnDef<Payment>[] = [
@@ -102,37 +102,47 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "l",
+    header: "Длина",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div >{row.getValue("l")}</div>
     ),
   },
   {
-    accessorKey: "email",
+    accessorKey: "name",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Название
           <ArrowUpDown />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div>
+  {String(row.getValue("name"))
+    .split(" ")
+    .map((word, index, arr) =>
+      index === arr.length - 1
+        ? word 
+        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() 
+    )
+    .join(" ")}
+</div>
+,
   },
   {
     accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    header: () => <div className="text-right">Цена</div>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"))
 
       // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
+      const formatted = new Intl.NumberFormat("ru-RU", {
         style: "currency",
-        currency: "USD",
+        currency: "RUB",
       }).format(amount)
 
       return <div className="text-right font-medium">{formatted}</div>
@@ -153,15 +163,15 @@ export const columns: ColumnDef<Payment>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel>Действия</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(payment.id)}
             >
-              Copy payment ID
+              В корзину
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>В избранное</DropdownMenuItem>
+            <DropdownMenuItem>Подробнее</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
@@ -202,17 +212,45 @@ export function ProductTable(products: any) {
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Поиск по подразделу..."
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
+        
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
+              Фильтры <ChevronDown />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                )
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+        &nbsp;
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="">
+              Отобразить <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
