@@ -1,215 +1,41 @@
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Logo } from "../navbar/logo";
+import { asortiment } from "../navbar-02/config";
+import { navItems } from "../navbar/nav-menu";
 
-const footerSections = [
-  {
-    title: "Product",
-    links: [
-      {
-        title: "Overview",
-        href: "#",
-      },
-      {
-        title: "Features",
-        href: "#",
-      },
-      {
-        title: "Solutions",
-        href: "#",
-      },
-      {
-        title: "Tutorials",
-        href: "#",
-      },
-      {
-        title: "Pricing",
-        href: "#",
-      },
-      {
-        title: "Releases",
-        href: "#",
-      },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      {
-        title: "About us",
-        href: "#",
-      },
-      {
-        title: "Careers",
-        href: "#",
-      },
-      {
-        title: "Press",
-        href: "#",
-      },
-      {
-        title: "News",
-        href: "#",
-      },
-      {
-        title: "Media kit",
-        href: "#",
-      },
-      {
-        title: "Contact",
-        href: "#",
-      },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      {
-        title: "Blog",
-        href: "#",
-      },
-      {
-        title: "Newsletter",
-        href: "#",
-      },
-      {
-        title: "Events",
-        href: "#",
-      },
-      {
-        title: "Help centre",
-        href: "#",
-      },
-      {
-        title: "Tutorials",
-        href: "#",
-      },
-      {
-        title: "Support",
-        href: "#",
-      },
-    ],
-  },
-  {
-    title: "Use cases",
-    links: [
-      {
-        title: "Startups",
-        href: "#",
-      },
-      {
-        title: "Enterprise",
-        href: "#",
-      },
-      {
-        title: "Government",
-        href: "#",
-      },
-      {
-        title: "SaaS",
-        href: "#",
-      },
-      {
-        title: "Marketplaces",
-        href: "#",
-      },
-      {
-        title: "Ecommerce",
-        href: "#",
-      },
-    ],
-  },
-  {
-    title: "Social",
-    links: [
-      {
-        title: "Twitter",
-        href: "#",
-      },
-      {
-        title: "LinkedIn",
-        href: "#",
-      },
-      {
-        title: "Facebook",
-        href: "#",
-      },
-      {
-        title: "GitHub",
-        href: "#",
-      },
-      {
-        title: "AngelList",
-        href: "#",
-      },
-      {
-        title: "Dribbble",
-        href: "#",
-      },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      {
-        title: "Terms",
-        href: "#",
-      },
-      {
-        title: "Privacy",
-        href: "#",
-      },
-      {
-        title: "Cookies",
-        href: "#",
-      },
-      {
-        title: "Licenses",
-        href: "#",
-      },
-      {
-        title: "Settings",
-        href: "#",
-      },
-      {
-        title: "Contact",
-        href: "#",
-      },
-    ],
-  },
-];
-
+const groups = asortiment.filter(item => item.type === "group");
 const Footer01Page = () => {
   return (
     <div className="mt-5 bg-accent text-primary flex flex-col">
       <div className="grow bg-muted" />
       <footer>
-        <div className="max-w-screen-xl mx-auto">
-          <div className="py-12  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-8 gap-y-10 px-6 xl:px-0">
-            {footerSections.map(({ title, links }) => (
-              <div key={title}>
-                <h6 className="font-semibold  ">{title}</h6>
-                <ul className="mt-6 space-y-4 " >
-                  {links.map(({ title, href }) => (
-                    <li key={title}>
-                      <Link
-                        href={href}
-                        className="text-primary/80 hover:text-foreground"
-                      >
-                        {title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+        <div className="max-w-screen-xl mx-10 md:mx-auto grid grid-cols-5">
+          <div className="py-12 col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 ">
+            {groups.map((group, index) => (
+              <div key={index}>
+                <h6 className="font-semibold">{group.title}</h6>
+               
+                <Link href={group.href} className="text-primary/80 hover:text-foreground">
+                  Перейти к категории
+                </Link>
               </div>
             ))}
           </div>
-          <Separator />
-          <div className="py-8 flex flex-col sm:flex-row items-center justify-between gap-x-2 gap-y-4 px-6 xl:px-0">
+          <div className="py-12 col-span-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+            {navItems.map((navItem, index) => (
+              <div key={index}>
+               
+                <Link href={navItem.href} className="text-primary/80 hover:text-foreground">
+                  {navItem.name}
+                </Link>
+              </div>
+            ))}
+          </div>
+          <Separator className="w-full col-span-5 mx-auto" />
+          <div className="col-span-5 mx-auto py-5 flex justify-between">
             <Logo />
-            
 
-            {/* Copyright */}
             <span className="text-primary/80 text-sm">
               &copy; {new Date().getFullYear()}{" "}
               <Link href="/" target="_blank">

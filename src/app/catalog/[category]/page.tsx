@@ -14,14 +14,23 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   const categoryData: any = await Category.findOne({ slug: category }).lean();
   if (!categoryData) return notFound(); 
 
+  const cleanedCategoryData = {
+    ...categoryData,
+    _id: categoryData._id.toString(), 
+  };
+
   const products = await Product.find({ category }).lean();
+
+  const cleanedProducts = products.map((product: any) => ({
+    ...product,
+    _id: product._id.toString(), 
+  }));
 
   return (
     <main>
       <Breadcrumbs />
-      <h1>{categoryData.name}</h1>
-      <p>{categoryData.description}</p>
-      <ProductTable products={products} />
+     
+      <ProductTable products={cleanedProducts} />
     </main>
   );
 }
