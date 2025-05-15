@@ -117,58 +117,13 @@ const AsortimentBlock2 = () => {
           Ассортимент
         </AuroraText>
         <div className="mt-4 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-  {/* {catalog.map((item) => {
-  const delay = (Math.random() * 4).toFixed(2);      
-  const duration = (4 + Math.random() * 4).toFixed(2); 
 
-  return (
-    <div key={item.title} className="relative">
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent/10 rounded-md animate-pulse"
-        style={{
-          animationDelay: `${delay}s`,
-          animationDuration: `${duration}s`,
-          zIndex: -1, 
-        }}
-      ></div>
-
-      
-      <Card className="p-5 border relative bg-transparent dark:from-slate-900 dark:to-slate-700 rounded-md">
-        <h3 className="font-semibold tracking-tight text-lg mb-4">
-          {item.title}
-        </h3>
-
-        <div className="flex items-start gap-4">
-          <Image
-            src={item.icon}
-            alt="icon"
-            width={100}
-            height={100}
-            className="h-24 w-24 rounded-lg bg-muted shrink-0"
-          />
-
-          <div className="space-y-2 text-sm text-muted-foreground">
-            {item.item.map((subItem, index) => (
-              <div key={index}>
-                <Link
-                  href={subItem.href}
-                  className="text-xs font-semibold tracking-tight text-muted-foreground hover:text-card-foreground hover:underline"
-                >
-                  {subItem.title}
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Card>
-    </div>
-  );
-})} */}
 {catalog.map((item) => {
-  
-
   return (
-    <div key={item.title} className="relative overflow-hidden rounded-md">
+    <Card
+      key={item.title}
+      className="relative overflow-hidden rounded-md shadow-md p-5 border bg-transparent dark:from-slate-900 dark:to-slate-700"
+    >
       {/* Фоновая картинка с размытой областью и градиентом прозрачности */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -183,41 +138,38 @@ const AsortimentBlock2 = () => {
       ></div>
 
       {/* Контент карточки */}
-      <Card className="p-5 border relative bg-transparent dark:from-slate-900 dark:to-slate-700 rounded-md">
-        {/* Заголовок на всю ширину */}
-        <h3 className="font-semibold tracking-tight text-lg mb-4">
-          {item.title}
-        </h3>
+      <h3 className="font-semibold tracking-tight text-lg mb-4">
+        {item.title}
+      </h3>
 
-        {/* Блок: картинка + список */}
-        <div className="grid grid-cols-2 gap-4">
-          {/* Картинка слева */}
-          <Image
-            src={item.icon}
-            alt="icon"
-            width={100}
-            height={100}
-            className="h-24 w-24 rounded-lg bg-muted shrink-0"
-          />
+      <div className="grid grid-cols-2 gap-4">
+        {/* Картинка слева */}
+        <Image
+          src={item.icon}
+          alt="icon"
+          width={100}
+          height={100}
+          className="h-24 w-24 rounded-lg bg-muted shrink-0"
+        />
 
-          {/* Список ссылок справа */}
-          <div className="space-y-2 text-sm text-muted-foreground">
-            {item.item.map((subItem, index) => (
-              <div key={index}>
-                <Link
-                  href={subItem.href}
-                  className="text-md font-semibold tracking-tight text-muted-foreground hover:text-card-foreground hover:underline"
-                >
-                  {subItem.title}
-                </Link>
-              </div>
-            ))}
-          </div>
+        {/* Список ссылок справа */}
+        <div className="space-y-2 text-sm text-muted-foreground">
+          {item.item.map((subItem, index) => (
+            <div key={index}>
+              <Link
+                href={subItem.href}
+                className="text-md font-semibold tracking-tight text-destructive hover:text-accent hover:underline"
+              >
+                {subItem.title}
+              </Link>
+            </div>
+          ))}
         </div>
-      </Card>
-    </div>
+      </div>
+    </Card>
   );
 })}
+
 
 
 

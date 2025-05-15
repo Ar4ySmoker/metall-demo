@@ -13,17 +13,14 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, ChevronDown, Minus, Plus, ShoppingBasket } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+// import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -35,39 +32,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+declare module '@tanstack/react-table' {
+  interface TableMeta<TData> {
+    updateData?: (newData: TData[]) => void
+  }
+}
 
 const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    l: "3 м",
-    name: "Арматура А3 А500С рифленая 6 мм.",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    l: "6 м",
-    name: "Арматура А3 А500С рифленая 8 мм.",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    l: "12 м",
-    name: "Арматура А3 А500С рифленая 10 мм.",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    l: "3 м",
-    name: "Арматура А3 А500С рифленая 12 мм.",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    l: "н/м",
-    name: "Арматура А3 А500С рифленая 14 мм.",
-  },
-  
+  { id: "m5gr84i9", amount: 316, l: "3 м", name: "Арматура А3 А500С рифленая 6 мм.", count: 1 },
+  { id: "3u1reuv4", amount: 242, l: "6 м", name: "Арматура А3 А500С рифленая 8 мм.", count: 1 },
+  { id: "derv1ws0", amount: 837, l: "12 м", name: "Арматура А3 А500С рифленая 10 мм.", count: 1 },
+  { id: "5kma53ae", amount: 874, l: "3 м", name: "Арматура А3 А500С рифленая 12 мм.", count: 1 },
+  { id: "bhqecj4p", amount: 721, l: "н/м", name: "Арматура А3 А500С рифленая 14 мм.", count: 1 },
 ]
 
 export type Payment = {
@@ -76,32 +52,11 @@ export type Payment = {
   amount: number
   l: "3 м" | "6 м" | "12 м" | "н/м"
   name: string
+  count?: number
 }
 
 export const columns: ColumnDef<Payment>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
+    {
     accessorKey: "l",
     header: "Длина",
     cell: ({ row }) => (
@@ -139,7 +94,6 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"))
 
-      // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat("ru-RU", {
         style: "currency",
         currency: "RUB",
@@ -148,39 +102,89 @@ export const columns: ColumnDef<Payment>[] = [
       return <div className="text-right font-medium">{formatted}</div>
     },
   },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original
+{
+  id: "count",
+  header: () => <div className="text-center">Количество</div>,
+  cell: ({ row, table }) => {
+    const item = row.original
+    const updateRow = (newCount: number) => {
+      const updatedRow = { ...item, count: newCount }
+      const newData = [...table.options.data]
+      newData[row.index] = updatedRow
+      if (table.options.meta?.updateData) {
+        table.options.meta.updateData(newData)
+      }
+    }
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Действия</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              В корзину
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>В избранное</DropdownMenuItem>
-            <DropdownMenuItem>Подробнее</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
-  },
+    const handleIncrement = () => updateRow((item.count || 0) + 1)
+    const handleDecrement = () => updateRow(Math.max(0, (item.count || 0) - 1))
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = parseInt(e.target.value, 10)
+      updateRow(!isNaN(value) ? value : 0)
+    }
+
+    return (
+      <div className="p-2 text-center space-y-2">
+        <div className="flex items-center justify-center space-x-2">
+          <Button variant="outline" size="icon" className="h-6 w-6" onClick={handleDecrement}>
+            <Minus className="h-4 w-4" />
+            <span className="sr-only">Уменьшить</span>
+          </Button>
+
+          <Input
+            type="number"
+            inputMode="numeric"
+            className="w-16 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            value={item.count}
+            onChange={handleChange}
+          />
+
+          <Button variant="outline" size="icon" className="h-6 w-6" onClick={handleIncrement}>
+            <Plus className="h-4 w-4" />
+            <span className="sr-only">Увеличить</span>
+          </Button>
+        </div>
+      </div>
+    )
+  }
+}
+,
+{
+  id: "sum",
+  header: () => <div className="text-right">Итого</div>,
+  cell: ({ row }) => {
+    const amount = row.original.amount
+    const count = parseInt(row.original.count as any) || 0
+    const total = amount * count
+
+    const formatted = new Intl.NumberFormat("ru-RU", {
+      style: "currency",
+      currency: "RUB",
+    }).format(total)
+
+    return <div className="text-right font-medium">{formatted}</div>
+  }
+}
+,
+{
+  id: "actions",
+   header: () => <div className="text-right">В корзину</div>,
+  cell: ({ row }) => {
+    const payment = row.original
+    return(
+      console.log(payment),
+      <div className="flex justify-end mr-5 hover:text-accent transition-all duration-300">
+        <ShoppingBasket />
+      </div>
+    )
+  }
+}
 ]
 
 export function ProductTable(products: any) {
     console.log(products);
+      const [tableData, setTableData] = React.useState<Payment[]>(data)
+
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -188,16 +192,22 @@ export function ProductTable(products: any) {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
-
-  const table = useReactTable({
-    data,
+const updateData = (newData: Payment[]) => {
+    setTableData(newData)
+  }
+   const table = useReactTable({
+    data: tableData,
     columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
+    meta: {
+      updateData, // 
+    },
+    // остальные параметры:
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     state: {

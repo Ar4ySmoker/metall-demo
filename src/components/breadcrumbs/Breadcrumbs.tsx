@@ -14,15 +14,17 @@ import React from 'react'
 
 // Словарь: slug => отображаемое название
 const BREADCRUMB_LABELS: Record<string, string> = {
-  components: 'Компоненты',
-  breadcrumb: 'Хлебные крошки',
-  products: 'Товары',
-  about: 'О нас',
-  contact: 'Контакты',
-  armatura: 'Арматура',
-  catalog: 'Каталог',
-  profnastil: 'Профнастил'
+  'components': 'Компоненты',
+  'breadcrumb': 'Хлебные крошки',
+  'products': 'Товары',
+  'about': 'О нас',
+  'contact': 'Контакты',
+  'armatura': 'Арматура',
+  'catalog': 'Каталог',
+  'profnastil': 'Профнастил',
+  'truba-profilevnaya-pryamougolnaya': 'Труба профильная прямоугольная', // ✅
 }
+
 
 function formatLabel(segment: string) {
   return (
