@@ -4,23 +4,37 @@ import { Category } from './Category';
 console.log(Category)
 
 interface IProduct extends Document {
-  category: string; // Ссылка на категорию
+  category: string; 
   title: string;
+  fluidity: string;
+  welded: string;
   description: string;
   price: number;
+  unit: string;
+  count: number;
+  length: number;
+  diameterMm: number;
+  type: string;
   slug: string;
-  image: string; // URL изображения товара
-  seoTitle: string; // Для SEO title
-  seoDescription: string; // Для SEO description
-  seoKeywords: string; // Для SEO keywords
-  seoImage: string; // Для SEO Open Graph Image
+  image: string; 
+  seoTitle: string; 
+  seoDescription: string; 
+  seoKeywords: string; 
+  seoImage: string; 
 }
 
 const ProductSchema = new Schema<IProduct>({
   category: { type: String, required: true, ref: 'Category' },
   title: { type: String, required: true },
+  fluidity: { type: String, required: true },
+  welded: { type: String, required: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },
+  unit: { type: String, required: true },
+  count: { type: Number, required: true },
+  length: { type: Number, required: true },
+  diameterMm: { type: Number, required: true },
+  type: { type: String, required: true },
   slug: { type: String, required: true, unique: true },
   image: { type: String, required: true },
   seoTitle: { type: String, required: true },

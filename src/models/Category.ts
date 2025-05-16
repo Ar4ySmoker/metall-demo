@@ -29,6 +29,7 @@ export interface ICategory extends Document {
   name: string;
   slug: string;
   description: string;
+  subcategory: string; // Это будет подкатегория товара
   parent?: string; // slug родительской категории
 }
 
@@ -36,6 +37,7 @@ const CategorySchema = new Schema<ICategory>({
   name: { type: String, required: true },
   slug: { type: String, required: true, unique: true },
   description: { type: String },
+  subcategory: { type: String, required: true }, // Это будет подкатегория товара
   parent: { type: String, default: null } // Можно сделать ref: 'Category', если хочешь ObjectId
 });
 

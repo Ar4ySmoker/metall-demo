@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, Minus, Plus, ShoppingBasket } from "lucide-react"
+import { ArrowUpDown, ChevronDown, } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 // import { Checkbox } from "@/components/ui/checkbox"
@@ -32,67 +32,88 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { CartItem } from "@/app/types/CartItem"
+import { fuzzyFilter } from "@/utils/convert-to-latin"
+import InputWithUnit from "../quantityControls/text"
+import { AddToCartCell } from "./AddToCartCell"
+
 declare module '@tanstack/react-table' {
   interface TableMeta<TData> {
     updateData?: (newData: TData[]) => void
   }
 }
 
-const data: Payment[] = [
-  { id: "m5gr84i9", amount: 316, l: "3 м", name: "Арматура А3 А500С рифленая 6 мм.", count: 1 },
-  { id: "3u1reuv4", amount: 242, l: "6 м", name: "Арматура А3 А500С рифленая 8 мм.", count: 1 },
-  { id: "derv1ws0", amount: 837, l: "12 м", name: "Арматура А3 А500С рифленая 10 мм.", count: 1 },
-  { id: "5kma53ae", amount: 874, l: "3 м", name: "Арматура А3 А500С рифленая 12 мм.", count: 1 },
-  { id: "bhqecj4p", amount: 721, l: "н/м", name: "Арматура А3 А500С рифленая 14 мм.", count: 1 },
-]
+export const columns: ColumnDef<CartItem>[] = [
+  {
+  accessorKey: "fluidity",
+  header: "",
+  enableHiding: true,
+  enableColumnFilter: false,
+  cell: () => null,
+},
+ {
+  accessorKey: "type",
+  header: "",
+  enableHiding: true,
+  enableColumnFilter: false,
+  cell: () => null,
+},
+{
+  accessorKey: "C",
+  header: "",
+  enableHiding: true,
+  enableColumnFilter: false,
+  cell: () => null,
+},
+{
+  accessorKey: "diameterMm",
+  header: "",
+  enableHiding: true,
+  enableColumnFilter: false,
+  cell: () => null,
+},
 
-export type Payment = {
-
-  id: string
-  amount: number
-  l: "3 м" | "6 м" | "12 м" | "н/м"
-  name: string
-  count?: number
-}
-
-export const columns: ColumnDef<Payment>[] = [
     {
-    accessorKey: "l",
+    accessorKey: "length",
     header: "Длина",
     cell: ({ row }) => (
-      <div >{row.getValue("l")}</div>
+      <div >{row.getValue("length")}</div>
     ),
   },
   {
-    accessorKey: "name",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Название
-          <ArrowUpDown />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div>
-  {String(row.getValue("name"))
-    .split(" ")
-    .map((word, index, arr) =>
-      index === arr.length - 1
-        ? word 
-        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() 
+  accessorKey: "title", 
+  filterFn: fuzzyFilter,
+  header: ({ column }) => {
+    return (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Название
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
     )
-    .join(" ")}
-</div>
-,
   },
+  cell: ({ row }) => {
+    const title = row.getValue("title") as string;
+    const fluidity = row.getValue("fluidity") as string;
+    const type = row.getValue("type") as string;
+    const C = row.getValue("C") as string;
+    const diameter = row.getValue("diameterMm") as number | undefined;
+
+    return (
+      <div>
+        {title} {fluidity ? fluidity : type}{C ? ' ' + C : ''} {diameter ? `Ø${diameter}мм` : ''}
+      </div>
+    );
+  },
+}
+,
   {
-    accessorKey: "amount",
+    accessorKey: "price",
     header: () => <div className="text-right">Цена</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
+      const amount = parseFloat(row.getValue("price"))
 
       const formatted = new Intl.NumberFormat("ru-RU", {
         style: "currency",
@@ -105,103 +126,61 @@ export const columns: ColumnDef<Payment>[] = [
 {
   id: "count",
   header: () => <div className="text-center">Количество</div>,
-  cell: ({ row, table }) => {
-    const item = row.original
-    const updateRow = (newCount: number) => {
-      const updatedRow = { ...item, count: newCount }
-      const newData = [...table.options.data]
-      newData[row.index] = updatedRow
-      if (table.options.meta?.updateData) {
-        table.options.meta.updateData(newData)
-      }
-    }
-
-    const handleIncrement = () => updateRow((item.count || 0) + 1)
-    const handleDecrement = () => updateRow(Math.max(0, (item.count || 0) - 1))
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = parseInt(e.target.value, 10)
-      updateRow(!isNaN(value) ? value : 0)
-    }
+  cell: ({ row }) => {
+    const item = row.original 
 
     return (
-      <div className="p-2 text-center space-y-2">
-        <div className="flex items-center justify-center space-x-2">
-          <Button variant="outline" size="icon" className="h-6 w-6" onClick={handleDecrement}>
-            <Minus className="h-4 w-4" />
-            <span className="sr-only">Уменьшить</span>
-          </Button>
-
-          <Input
-            type="number"
-            inputMode="numeric"
-            className="w-16 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-            value={item.count}
-            onChange={handleChange}
-          />
-
-          <Button variant="outline" size="icon" className="h-6 w-6" onClick={handleIncrement}>
-            <Plus className="h-4 w-4" />
-            <span className="sr-only">Увеличить</span>
-          </Button>
-        </div>
-      </div>
+      <InputWithUnit itemId={item._id}        />
     )
-  }
-}
-,
-{
-  id: "sum",
-  header: () => <div className="text-right">Итого</div>,
-  cell: ({ row }) => {
-    const amount = row.original.amount
-    const count = parseInt(row.original.count as any) || 0
-    const total = amount * count
-
-    const formatted = new Intl.NumberFormat("ru-RU", {
-      style: "currency",
-      currency: "RUB",
-    }).format(total)
-
-    return <div className="text-right font-medium">{formatted}</div>
   }
 }
 ,
 {
   id: "actions",
-   header: () => <div className="text-right">В корзину</div>,
+  header: () => <div className="text-right">В корзину</div>,
   cell: ({ row }) => {
-    const payment = row.original
-    return(
-      console.log(payment),
-      <div className="flex justify-end mr-5 hover:text-accent transition-all duration-300">
-        <ShoppingBasket />
-      </div>
-    )
+    const product = row.original;
+    const item: CartItem = {
+      _id: product._id,
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      count: 1,
+      unit: product.unit,
+      type: product.type,
+      fluidity: product.fluidity,
+      size: product.size,
+      length: product.length,
+      weight: product.weight,
+      diameterMm: product.diameterMm,
+    };
+
+    return <AddToCartCell item={item} />;
   }
 }
+
+
 ]
 
-export function ProductTable(products: any) {
-    console.log(products);
-      const [tableData, setTableData] = React.useState<Payment[]>(data)
 
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
-const updateData = (newData: Payment[]) => {
-    setTableData(newData)
-  }
-   const table = useReactTable({
+export function ProductTable({ products }: { products: any }) {
+  const [tableData, setTableData] = React.useState<CartItem[]>(products);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
+
+ 
+ const updateData = (newData: CartItem[]) => {
+    setTableData(newData);
+  };
+
+ const table = useReactTable({
     data: tableData,
     columns,
     meta: {
-      updateData, // 
+      updateData,
     },
-    // остальные параметры:
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -216,20 +195,21 @@ const updateData = (newData: Payment[]) => {
       columnVisibility,
       rowSelection,
     },
-  })
+  });
 
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Поиск по подразделу..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        
+  placeholder="Поиск по подразделу..."
+  value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+  onChange={(event) =>
+    table.getColumn("title")?.setFilterValue(event.target.value)
+  }
+  className="max-w-sm"
+/>
+
+        {/* Фильтры */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -240,93 +220,50 @@ const updateData = (newData: Payment[]) => {
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-        &nbsp;
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="">
-              Отобразить <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
+              .map((column) => (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                >
+                  {column.id}
+                </DropdownMenuCheckboxItem>
+              ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      {/* Основная таблица */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  )
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
+                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columns.length} className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>
@@ -334,30 +271,36 @@ const updateData = (newData: Payment[]) => {
           </TableBody>
         </Table>
       </div>
-      {/* <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
-      </div> */}
+
+      {/* Мобильная версия карточек */}
+      <div className="md:hidden">
+        {table.getRowModel().rows?.length ? (
+          table.getRowModel().rows.map((row) => (
+            <div key={row.id} className="mb-4 p-4 border rounded-lg shadow-sm">
+              <div className="flex justify-between items-center">
+                <div className="font-semibold">{String(row.getVisibleCells()[0]?.getValue())}</div>
+              </div>
+              <div className="mt-2">
+                <div className="text-sm text-gray-600">
+                  <strong>Цена:</strong> {String(row.getVisibleCells()[1]?.getValue())}
+                </div>
+                <div className="text-sm text-gray-600">
+                  <strong>Количество:</strong> {String(row.getVisibleCells()[2]?.getValue())}
+                </div>
+                <div className="text-sm text-gray-600">
+                  <strong>Сумма:</strong> {String(row.getVisibleCells()[3]?.getValue())}
+                </div>
+              </div>
+              <button className="mt-3 w-full bg-blue-500 text-white py-2 rounded-lg">
+                В корзину
+              </button>
+            </div>
+          ))
+        ) : (
+          <div className="text-center">No results.</div>
+        )}
+      </div>
     </div>
-  )
+  );
 }
+

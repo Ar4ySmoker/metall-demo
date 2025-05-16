@@ -5,14 +5,15 @@ import { Card } from "./ui/card";
 import { AuroraText } from "./magicui/aurora-text";
 
 const catalog = [
-  {
+  { _id: '324mmmks312',
+    href: "/catalog/armatura",
     icon: "/images/armatura-a3.jpg",
     title: "Арматура",
     item: [
-      { title: "Арматура А3 рифленая", href: "#" },
-      { title: "Арматура А1 гладкая", href: "#" },
-      { title: "Арматура композитная", href: "#" },
-      { title: "Арматура А1 катанка", href: "#" },
+      { title: "Арматура А3 рифленая", href: "/catalog/armatura/a500c" },
+      { title: "Арматура А1 гладкая", href: "/catalog/armatura/armatura-a1-gladkaya" },
+      { title: "Арматура композитная", href: "/catalog/armatura/armatura-kompozitnaya" },
+      { title: "Арматура А1 катанка", href: "/catalog/armatura/armatura-a1-katanka" },
     ],
   },
   {
@@ -124,7 +125,7 @@ const AsortimentBlock2 = () => {
       key={item.title}
       className="relative overflow-hidden rounded-md shadow-md p-5 border bg-transparent dark:from-slate-900 dark:to-slate-700"
     >
-      {/* Фоновая картинка с размытой областью и градиентом прозрачности */}
+      {/* <Link href={`/catalog/${item.href}`}> */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -137,7 +138,6 @@ const AsortimentBlock2 = () => {
         }}
       ></div>
 
-      {/* Контент карточки */}
       <h3 className="font-semibold tracking-tight text-lg mb-4">
         {item.title}
       </h3>
@@ -166,6 +166,7 @@ const AsortimentBlock2 = () => {
           ))}
         </div>
       </div>
+      {/* </Link> */}
     </Card>
   );
 })}

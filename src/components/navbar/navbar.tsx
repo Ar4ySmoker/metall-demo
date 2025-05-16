@@ -13,7 +13,7 @@ const Navbar = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
 
   return (
-    <div className="w-full bg-secondary">
+    <div className="relative w-full bg-secondary">
       <button
         onClick={() => setIsNavVisible(!isNavVisible)}
         className="hidden md:block fixed top-0 right-4 z-50 p-2 bg-secondary text-white rounded-full shadow-md"

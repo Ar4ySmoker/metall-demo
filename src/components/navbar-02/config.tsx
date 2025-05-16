@@ -55,7 +55,7 @@
 
 export const asortiment = [
   { type: "group", title: "Арматура", image: "/images/armatura-a3.jpg", href: "/catalog/armatura" },
-  { type: "item", title: "Арматура А3 рифленая", href: "/catalog/armatura/armatura-a3-riflenaya" },
+  { type: "item", title: "Арматура А3 рифленая", href: "/catalog/armatura/" },
   { type: "item", title: "Арматура А1 Гладкая", href: "/catalog/armatura/armatura-a1-gladkaya" },
   { type: "item", title: "Арматура композитная", href: "/catalog/armatura/armatura-kompozitnaya" },
 
