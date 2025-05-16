@@ -22,7 +22,10 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   'armatura': 'Арматура',
   'catalog': 'Каталог',
   'profnastil': 'Профнастил',
-  'truba-profilevnaya-pryamougolnaya': 'Труба профильная прямоугольная', // ✅
+  'truba-profilevnaya-pryamougolnaya': 'Труба профильная прямоугольная', 
+  'shop': 'Магазин',
+  'kvadrat': 'Квадрат',
+  'truba': 'Труба',
 }
 
 

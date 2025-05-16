@@ -142,7 +142,7 @@
 //   }
 //   return context
 // }
-import { CartItem } from "@/app/types/CartItem";
+import { CartItem } from "@/types/CartItem";
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 
 interface CartFavoritesContextType {

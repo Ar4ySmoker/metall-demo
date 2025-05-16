@@ -1,7 +1,7 @@
 import React from "react";
 import { useCartFavorites } from "@/context/CartFavoritesContext";
 import InputWithUnit from "../quantityControls/text"; // Для изменения количества и единицы измерения
-import { CartItem } from "@/app/types/CartItem";
+import { CartItem } from "@/types/CartItem";
 
 // Форматирование валюты
 const formatCurrency = (amount: number): string => {

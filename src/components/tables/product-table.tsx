@@ -32,11 +32,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { CartItem } from "@/app/types/CartItem"
+import { CartItem } from "@/types/CartItem"
 import { fuzzyFilter } from "@/utils/convert-to-latin"
 import InputWithUnit from "../quantityControls/text"
 import { AddToCartCell } from "./AddToCartCell"
-import { Tabs,  TabsList, TabsTrigger } from "../ui/tabs"
+import TabsComponent from "./tabs"
 
 declare module '@tanstack/react-table' {
   interface TableMeta<TData> {
@@ -45,34 +45,7 @@ declare module '@tanstack/react-table' {
 }
 
 export const columns: ColumnDef<CartItem>[] = [
-  {
-  accessorKey: "fluidity",
-  header: "",
-  enableHiding: true,
-  enableColumnFilter: false,
-  cell: () => null,
-},
- {
-  accessorKey: "type",
-  header: "",
-  enableHiding: true,
-  enableColumnFilter: false,
-  cell: () => null,
-},
-{
-  accessorKey: "C",
-  header: "",
-  enableHiding: true,
-  enableColumnFilter: false,
-  cell: () => null,
-},
-{
-  accessorKey: "diameterMm",
-  header: "",
-  enableHiding: true,
-  enableColumnFilter: false,
-  cell: () => null,
-},
+ 
 
     {
     accessorKey: "length",
@@ -97,14 +70,11 @@ export const columns: ColumnDef<CartItem>[] = [
   },
   cell: ({ row }) => {
     const title = row.getValue("title") as string;
-    const fluidity = row.getValue("fluidity") as string;
-    const type = row.getValue("type") as string;
-    const C = row.getValue("C") as string;
-    const diameter = row.getValue("diameterMm") as number | undefined;
+    
 
     return (
       <div>
-        {title} {fluidity ? fluidity : type}{C ? ' ' + C : ''} {diameter ? `Ø${diameter}мм` : ''}
+        {title} 
       </div>
     );
   },
@@ -210,13 +180,7 @@ export function ProductTable({ products }: { products: any }) {
   className="max-w-sm"
 />
 
-<Tabs defaultValue="account" className="rounded-md border">
- <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="a-3">A-3</TabsTrigger>
-        <TabsTrigger value="a-1">A-1</TabsTrigger>
-        <TabsTrigger value="Композитная">Композитная</TabsTrigger>
-      </TabsList>
-</Tabs>
+<TabsComponent/>
 
         {/* Фильтры */}
         <DropdownMenu>

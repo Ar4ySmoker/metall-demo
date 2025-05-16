@@ -55,22 +55,22 @@
 
 export const asortiment = [
   { type: "group", title: "Арматура", image: "/images/armatura-a3.jpg", href: "/shop/armatura" },
-  { type: "item", title: "Арматура А3 рифленая", href: "/shop/armatura/" },
-  { type: "item", title: "Арматура А1 Гладкая", href: "/shop/armatura/armatura-a1-gladkaya" },
-  { type: "item", title: "Арматура композитная", href: "/shop/armatura/armatura-kompozitnaya" },
+  { type: "item", title: "Арматура А3 рифленая", href: "/shop/armatura/a500c" },
+  { type: "item", title: "Арматура А1 Гладкая", href: "/shop/armatura/a400c" },
+  { type: "item", title: "Арматура композитная", href: "/shop/armatura/comp" },
 
-  { type: "group", title: "Труба профильная", image: "/images/armatura-a3.jpg", href: "/shop/truba-profilevnaya" },
-  { type: "item", title: "Труба профильная квадратная", href: "/shop/truba-profilevnaya-kvadratnaya" },
-  { type: "item", title: "Труба профильная прямоугольная", href: "/shop/truba-profilevnaya-pryamougolnaya" },
-  { type: "item", title: "Труба профильная оцинкованная", href: "/shop/truba-profilevnaya/truba-profilevnaya-ocinkovannaya" },
+  { type: "group", title: "Труба профильная", image: "/images/armatura-a3.jpg", href: "/shop/truba/profilevnaya" },
+  { type: "item", title: "Труба профильная квадратная", href: "/shop/truba-profilevnaya/kvadratnaya" },
+  { type: "item", title: "Труба профильная прямоугольная", href: "/shop/truba-profilevnaya/pryamougolnaya" },
+  { type: "item", title: "Труба профильная оцинкованная", href: "/shop/truba-profilevnaya/ocinkovannaya" },
 
-  { type: "group", title: "Трубы", image: "/images/armatura-a3.jpg", href: "/shop/truby" },
-  { type: "item", title: "Труба электросварная", href: "/shop/truby/truba-elektrosvarnaya" },
-  { type: "item", title: "Труба водогазопроводная", href: "/shop/truby/truba-vodogazoprovodnaya" },
-  { type: "item", title: "Труба оцинкованная", href: "/shop/truby/truba-ocinkovannaya" },
+  { type: "group", title: "Трубы", image: "/images/armatura-a3.jpg", href: "/shop/truba" },
+  { type: "item", title: "Труба электросварная", href: "/shop/truba/elektrosvarnaya" },
+  { type: "item", title: "Труба водогазопроводная", href: "/shop/truba/vodogazoprovodnaya" },
+  { type: "item", title: "Труба оцинкованная", href: "/shop/truba/ocinkovannaya" },
 
-  { type: "group", title: "Квадрат стальной", href: "/shop/kvadrat-stalnoy" },
-  { type: "item", title: "Квадрат стальной", href: "/shop/kvadrat-stalnoy/kvadrat-stalnoy" },
+  { type: "group", title: "Квадрат", href: "/shop/kvadrat" },
+  { type: "item", title: "Квадрат стальной", href: "/shop/kvadrat/stalnoy/" },
 
   { type: "group", title: "Проволока", image: "/images/armatura-a3.jpg", href: "/shop/provod" },
   { type: "item", title: "Проволока", href: "/shop/provod/provod" },

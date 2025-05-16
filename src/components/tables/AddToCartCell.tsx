@@ -2,7 +2,7 @@
 "use client";
 import { ShoppingBasket } from "lucide-react";
 import { useCartFavorites } from "@/context/CartFavoritesContext";
-import { CartItem } from "@/app/types/CartItem";
+import { CartItem } from "@/types/CartItem";
 
 export function AddToCartCell({ item }: { item: CartItem }) {
   const { addToBasket } = useCartFavorites();

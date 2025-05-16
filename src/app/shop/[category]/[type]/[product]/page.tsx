@@ -1,25 +1,46 @@
-// app/catalog/[category]/[product]/page.tsx
-import { connectDB } from '@/lib/db';
-import { Product } from '@/models/Product';
+import { FC } from 'react';
 
-export default async function ProductPage({ params }: { params: Promise<{ product: string }> }) {
-  const { product } = await params;
-  await connectDB();
+interface Product {
+  _id: string;
+  title: string;
+  price: number;
+  unit: string;
+  diameterMm: number;
+  length: number;
+  slug: string;
+}
 
-  const productData: any = await Product.findOne({ slug: product }).lean();
-  
-  if (!productData) return <h1>Товар не найден</h1>;
+interface ProductTableProps {
+  products: Product[];
+}
 
-  const cleanedProductData = {
-    ...productData,
-    _id: productData._id.toString(), 
-  };
+export const ProductTable: FC<ProductTableProps> = ({ products }) => {
+  if (products.length === 0) {
+    return <div>Нет результатов</div>;
+  }
 
   return (
-    <main>
-      <h1>{cleanedProductData.title}</h1>
-      <p>{cleanedProductData.description}</p>
-      <p>Цена: {cleanedProductData.price} ₽</p>
-    </main>
+    <table>
+      <thead>
+        <tr>
+          <th>Название</th>
+          <th>Цена</th>
+          <th>Единица измерения</th>
+          <th>Диаметр</th>
+          <th>Длина</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((product) => (
+          <tr key={product._id}>
+            <td>{product.title}</td>
+            <td>{product.price} ₽</td>
+            <td>{product.unit}</td>
+            <td>{product.diameterMm} мм</td>
+            <td>{product.length} м</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
-}
+};
