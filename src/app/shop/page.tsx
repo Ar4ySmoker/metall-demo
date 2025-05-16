@@ -2,7 +2,7 @@ import AsortimentBlock2 from "@/components/asortiment-block-2";
 import { Breadcrumbs } from "@/components/breadcrumbs/Breadcrumbs";
 import Link from "next/link";
 
-export default function CatalogPage() {
+export default function ShopPage() {
   return (
     <main>
       <Breadcrumbs />

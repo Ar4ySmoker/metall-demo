@@ -36,6 +36,7 @@ import { CartItem } from "@/app/types/CartItem"
 import { fuzzyFilter } from "@/utils/convert-to-latin"
 import InputWithUnit from "../quantityControls/text"
 import { AddToCartCell } from "./AddToCartCell"
+import { Tabs,  TabsList, TabsTrigger } from "../ui/tabs"
 
 declare module '@tanstack/react-table' {
   interface TableMeta<TData> {
@@ -209,6 +210,14 @@ export function ProductTable({ products }: { products: any }) {
   className="max-w-sm"
 />
 
+<Tabs defaultValue="account" className="rounded-md border">
+ <TabsList className="grid w-full grid-cols-3">
+        <TabsTrigger value="a-3">A-3</TabsTrigger>
+        <TabsTrigger value="a-1">A-1</TabsTrigger>
+        <TabsTrigger value="Композитная">Композитная</TabsTrigger>
+      </TabsList>
+</Tabs>
+
         {/* Фильтры */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -272,34 +281,7 @@ export function ProductTable({ products }: { products: any }) {
         </Table>
       </div>
 
-      {/* Мобильная версия карточек */}
-      <div className="md:hidden">
-        {table.getRowModel().rows?.length ? (
-          table.getRowModel().rows.map((row) => (
-            <div key={row.id} className="mb-4 p-4 border rounded-lg shadow-sm">
-              <div className="flex justify-between items-center">
-                <div className="font-semibold">{String(row.getVisibleCells()[0]?.getValue())}</div>
-              </div>
-              <div className="mt-2">
-                <div className="text-sm text-gray-600">
-                  <strong>Цена:</strong> {String(row.getVisibleCells()[1]?.getValue())}
-                </div>
-                <div className="text-sm text-gray-600">
-                  <strong>Количество:</strong> {String(row.getVisibleCells()[2]?.getValue())}
-                </div>
-                <div className="text-sm text-gray-600">
-                  <strong>Сумма:</strong> {String(row.getVisibleCells()[3]?.getValue())}
-                </div>
-              </div>
-              <button className="mt-3 w-full bg-blue-500 text-white py-2 rounded-lg">
-                В корзину
-              </button>
-            </div>
-          ))
-        ) : (
-          <div className="text-center">No results.</div>
-        )}
-      </div>
+     
     </div>
   );
 }

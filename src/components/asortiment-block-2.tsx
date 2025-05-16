@@ -4,16 +4,16 @@ import { Card } from "./ui/card";
 
 import { AuroraText } from "./magicui/aurora-text";
 
-const catalog = [
+const shop = [
   { _id: '324mmmks312',
-    href: "/catalog/armatura",
+    href: "/shop/armatura",
     icon: "/images/armatura-a3.jpg",
     title: "Арматура",
     item: [
-      { title: "Арматура А3 рифленая", href: "/catalog/armatura/a500c" },
-      { title: "Арматура А1 гладкая", href: "/catalog/armatura/armatura-a1-gladkaya" },
-      { title: "Арматура композитная", href: "/catalog/armatura/armatura-kompozitnaya" },
-      { title: "Арматура А1 катанка", href: "/catalog/armatura/armatura-a1-katanka" },
+      { title: "Арматура А3 рифленая", href: "/shop/armatura/a500c" },
+      { title: "Арматура А1 гладкая", href: "/shop/armatura/armatura-a1-gladkaya" },
+      { title: "Арматура композитная", href: "/shop/armatura/armatura-kompozitnaya" },
+      { title: "Арматура А1 катанка", href: "/shop/armatura/armatura-a1-katanka" },
     ],
   },
   {
@@ -119,13 +119,13 @@ const AsortimentBlock2 = () => {
         </AuroraText>
         <div className="mt-4 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 
-{catalog.map((item) => {
+{shop.map((item) => {
   return (
     <Card
       key={item.title}
       className="relative overflow-hidden rounded-md shadow-md p-5 border bg-transparent dark:from-slate-900 dark:to-slate-700"
     >
-      {/* <Link href={`/catalog/${item.href}`}> */}
+      {/* <Link href={`/shop/${item.href}`}> */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{

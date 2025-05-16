@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Breadcrumbs } from '@/components/breadcrumbs/Breadcrumbs';
 import { ProductTable } from '@/components/tables/product-table';
 
-const ProductPage = () => {
+const TypePage = () => {
   const pathname = usePathname();  // Получаем текущий путь
   const [products, setProducts] = useState<any[]>([]);
 
@@ -36,13 +36,20 @@ const ProductPage = () => {
   }
 
   return (
-    <div>      
-        <Breadcrumbs />
+    <div>      <Breadcrumbs />
     
+      <div>
         <ProductTable products={products}/>
-       
+        {/* {products.map((product) => (
+          <div key={product._id}>
+            <h2>{product.title}</h2>
+            <p>Цена: {product.price} ₽</p>
+            <p>{product.description}</p>
+          </div>
+        ))} */}
+      </div>
     </div>
   );
 };
 
-export default ProductPage;
+export default TypePage;
