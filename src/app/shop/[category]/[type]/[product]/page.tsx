@@ -1,46 +1,44 @@
-import { FC } from 'react';
+import { notFound } from 'next/navigation';
+import { connectDB } from '@/lib/db';
+import { Category } from '@/models/Category';
+import { Product } from '@/models/Product';
+import { ProductTable } from '@/components/tables/product-table';
 
-interface Product {
-  _id: string;
-  title: string;
-  price: number;
-  unit: string;
-  diameterMm: number;
-  length: number;
-  slug: string;
-}
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ category: string; type: string }>;
+}) {
+  const { category, type } = await params;  // Получаем параметры через await
 
-interface ProductTableProps {
-  products: Product[];
-}
+  // Подключаемся к базе данных
+  await connectDB();
 
-export const ProductTable: FC<ProductTableProps> = ({ products }) => {
-  if (products.length === 0) {
-    return <div>Нет результатов</div>;
-  }
+  // Ищем родительскую категорию по slug
+  const parentCategory = await Category.findOne({ slug: category }).lean();
+  if (!parentCategory || !('_id' in parentCategory)) return notFound();
 
+  // Ищем подкатегорию по slug и parent ID
+  const subcategory = await Category.findOne({
+    slug: type,
+    parent: parentCategory._id,
+  }).lean();
+
+  if (!subcategory) return notFound();
+
+  // Ищем товары по категориям
+  const products = await Product.find({ category, type }).lean();
+
+  // Преобразуем _id в строку
+  const cleanedProducts = products.map((product) => ({
+    ...product,
+    _id: (product._id as { toString(): string }).toString(),
+  }));
+
+  // Отображаем таблицу товаров
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Название</th>
-          <th>Цена</th>
-          <th>Единица измерения</th>
-          <th>Диаметр</th>
-          <th>Длина</th>
-        </tr>
-      </thead>
-      <tbody>
-        {products.map((product) => (
-          <tr key={product._id}>
-            <td>{product.title}</td>
-            <td>{product.price} ₽</td>
-            <td>{product.unit}</td>
-            <td>{product.diameterMm} мм</td>
-            <td>{product.length} м</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <main>
+      <ProductTable products={cleanedProducts} />
+    </main>
   );
-};
+}

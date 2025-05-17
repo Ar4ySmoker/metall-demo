@@ -8,31 +8,31 @@ import { Breadcrumbs } from '@/components/breadcrumbs/Breadcrumbs';
 export default async function TypePage({
   params,
 }: {
-  params: { category: string; type: string };
+  params: Promise<{ category: string; type: string }>;
 }) {
-  const { category, type } = await params; // Используем await для разрешения промиса
+  // Ожидаем, пока параметры будут разрешены
+  const { category, type } = await params;
 
-  console.log('Received params:', { category, type }); 
+  console.log('Received params:', { category, type });
 
   await connectDB();
 
-// Найти родительскую категорию по slug
-const parentCategory = await Category.findOne({ slug: category }).lean();
-console.log(`Категория ${category} не найдена`);
+  // Находим родительскую категорию по slug
+  const parentCategory = await Category.findOne({ slug: category }).lean();
+  if (!parentCategory || !('_id' in parentCategory)) return notFound();
 
-if (!parentCategory || !('_id' in parentCategory)) return notFound();
-
-// Найти подкатегорию по slug и parent ID
-const subcategory = await Category.findOne({
-  slug: type,
-  parent: parentCategory._id, // Используем ObjectId без .toString()
-}).lean();
-
+  // Находим подкатегорию по slug и parent ID
+  const subcategory = await Category.findOne({
+    slug: type,
+    parent: parentCategory._id, // Используем ObjectId без .toString()
+  }).lean();
 
   if (!subcategory) return notFound();
 
-const products = await Product.find({ category: category, type: type }).lean();
+  // Ищем товары по категориям и типу
+  const products = await Product.find({ category, type }).lean();
 
+  // Преобразуем _id в строку для MongoDB
   const cleanedProducts = products.map((product) => ({
     ...product,
     _id: (product._id as { toString(): string }).toString(),
@@ -45,4 +45,3 @@ const products = await Product.find({ category: category, type: type }).lean();
     </main>
   );
 }
-

@@ -1,12 +1,12 @@
+import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import { Product } from '@/models/Product';
-import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   req: NextRequest,
-  context: { params: { category: string; type: string; product: string } }
+  { params }: { params: Promise<{ category: string; type: string; product: string }> }
 ) {
-  const { category, type, product } = context.params;
+  const { category, type, product } = await params;
 
   await connectDB();
 

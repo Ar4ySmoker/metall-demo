@@ -2,15 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import { Product } from '@/models/Product';
 
-interface Params {
-  params: {
-    title: string;
-    type: string;
-  };
-}
-
-export async function GET(req: NextRequest, { params }: Params) {
-  const { title, type } = params;
+export async function GET(
+  req: NextRequest,
+  context: any
+) {
+  const { title, type } = context.params;
 
   await connectDB();
 
