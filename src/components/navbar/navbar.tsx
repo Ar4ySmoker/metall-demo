@@ -8,6 +8,7 @@ import { FaTelegram, FaWhatsapp, FaViber } from "react-icons/fa";
 import Image from "next/image";
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
@@ -34,7 +35,9 @@ const Navbar = () => {
 
       <div className="h-20 bg-primary border-b flex items-center md:px-35">
 <div className="h-full flex items-center justify-between max-w-screen-xl mx-auto px-4 my-2 w-full">
+  <Link href="/">
           <Image src="/logo.svg" alt="logo" width={124} height={32} className="rounded" />
+  </Link>
           
           <div className="hidden md:flex flex-col items-center justify-center text-md font-bold">
             <div className="flex gap-2">

@@ -3,6 +3,7 @@ import { connectDB } from '@/lib/db';
 import { Category } from '@/models/Category';
 import { Product } from '@/models/Product';
 import { ProductTable } from '@/components/tables/product-table';
+import { Breadcrumbs } from '@/components/breadcrumbs/Breadcrumbs';
 
 export default async function Page({
   params,
@@ -38,6 +39,7 @@ export default async function Page({
   // Отображаем таблицу товаров
   return (
     <main>
+      <Breadcrumbs />
       <ProductTable products={cleanedProducts} />
     </main>
   );

@@ -44,6 +44,7 @@ declare module '@tanstack/react-table' {
   }
 }
 
+
 export const columns: ColumnDef<CartItem>[] = [
  
 
@@ -141,6 +142,13 @@ export function ProductTable({ products }: { products: any }) {
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
+ const types = Array.from(new Set(products.map((product: any) => product.type))) as string[];
+
+  // Фильтрация продуктов по выбранному типу
+  const filterProductsByType = (type: string) => {
+    const filteredProducts = products.filter((product: CartItem) => product.type === type);
+    setTableData(filteredProducts);
+  };
  
  const updateData = (newData: CartItem[]) => {
     setTableData(newData);
@@ -180,8 +188,7 @@ export function ProductTable({ products }: { products: any }) {
   className="max-w-sm"
 />
 
-<TabsComponent/>
-
+ <TabsComponent types={types} onTypeSelect={filterProductsByType} />
         {/* Фильтры */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

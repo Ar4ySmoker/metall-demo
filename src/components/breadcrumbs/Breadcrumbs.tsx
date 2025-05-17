@@ -26,6 +26,8 @@ const BREADCRUMB_LABELS: Record<string, string> = {
   'shop': 'Магазин',
   'kvadrat': 'Квадрат',
   'truba': 'Труба',
+  'a500c': 'Арматура А3 рифленая',
+  '12mm': '12мм',
 }
 
 

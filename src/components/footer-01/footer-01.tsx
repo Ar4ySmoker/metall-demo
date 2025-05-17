@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Logo } from "../navbar/logo";
-import { asortiment } from "../navbar-02/config";
+import { asortiment } from "@/lib/constants";
 import { navItems } from "../navbar/nav-menu";
 
 const groups = asortiment.filter(item => item.type === "group");

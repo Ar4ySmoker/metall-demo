@@ -122,15 +122,17 @@ export const asortiment = [
   { type: "item", title: "Электроды", href: "/shop/dopolnitelnye-materialy/elektrody" }
 ];
 
+
 export const asortimentWithSubcategories = [
   { type: "group", title: "Арматура", image: "/images/armatura-a3.jpg", href: "/shop/armatura" },
   {
+    href: "/shop/armatura/a500c",
     type: "item",
     title: "Арматура А3 рифленая",
     children: [
-      { title: "Арматура А3 12 мм", href: "shop/armatura/a500c/12mm/armatura-a3-12" },
-      { title: "Арматура А3 14 мм", href: "shop/armatura/a500c/14mm/armatura-a3-14" },
-      { title: "Арматура А3 16 мм", href: "shop/armatura/a500c/16mm/armatura-a3-16" },
+      { title: "Арматура А3 12 мм", href: "shop/armatura/a500c/12mm" },
+      { title: "Арматура А3 14 мм", href: "shop/armatura/a500c/14mm" },
+      { title: "Арматура А3 16 мм", href: "shop/armatura/a500c/16mm" },
     ],
   },
   {
@@ -273,6 +275,3 @@ export const asortimentWithSubcategories = [
   { type: "item", title: "Саморезы" },
   { type: "item", title: "Электроды" },
 ];
-
-
-

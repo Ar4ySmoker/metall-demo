@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { NavigationMenuLink } from "@/components/ui/navigation-menu";
-import { asortiment } from "./config";
-
+import { asortiment } from "@/lib/constants";
 const getVerticalColumns = (arr: typeof asortiment, cols: number) => {
   const perCol = Math.ceil(arr.length / cols);
   return Array.from({ length: cols }, (_, colIndex) =>

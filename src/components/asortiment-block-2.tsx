@@ -120,11 +120,11 @@ const AsortimentBlock2 = () => {
         </AuroraText>
         <div className="mt-4 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 
-{shop.map((item) => {
+{shop.map((item, index) => {
   return (
     <Card
-      key={item.title}
-      className="relative overflow-hidden rounded-md shadow-md p-5 border bg-transparent dark:from-slate-900 dark:to-slate-700"
+key={`${item.title}-${index}`}      
+className="relative overflow-hidden rounded-md shadow-md p-5 border bg-transparent dark:from-slate-900 dark:to-slate-700"
     >
       {/* <Link href={`/shop/${item.href}`}> */}
       <div
