@@ -1,4 +1,4 @@
-import { asortiment } from "@/components/navbar-02/config"; // Убедись, что путь правильный
+import { asortiment } from "@/lib/constants";
 import Link from "next/link";
 
 export const AsortimentBlock = () => {
