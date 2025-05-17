@@ -15,6 +15,14 @@ export default function CarouselWithPagination() {
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
 
+  const images = [
+    "/carousel/armatura-2.jpg",
+    "/carousel/truba-1.jpg",
+    "/carousel/large-steel.jpg",
+    "/carousel/large-steel-1.jpg",
+    "/carousel/armatura-32-mm.jpg",
+  ];
+
   React.useEffect(() => {
     if (!api) return;
 
@@ -33,18 +41,22 @@ export default function CarouselWithPagination() {
   }, [api]);
 
   return (
-    <div className="relative mx-auto w-full ">
-      <Carousel setApi={setApi}  opts={{
-    loop: true,
-  }} className="w-full">
+    <div className="relative mx-auto w-full">
+      <Carousel
+        setApi={setApi}
+        opts={{
+          loop: true,
+        }}
+        className="w-full"
+      >
         <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
+          {images.map((src, index) => (
             <CarouselItem
               key={index}
               className="flex justify-center items-center"
             >
               <Image
-                src="/images/1339473_original.jpg"
+                src={src}
                 alt={`Image ${index + 1}`}
                 width={600}
                 height={600}
@@ -55,7 +67,7 @@ export default function CarouselWithPagination() {
         </CarouselContent>
       </Carousel>
 
-      {/* Пагинация поверх изображений, но вне прокрутки */}
+      {/* Пагинация */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 bg-black/50 px-4 py-2 rounded-full z-10">
         {Array.from({ length: count }).map((_, index) => (
           <button

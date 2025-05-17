@@ -114,7 +114,7 @@ const AsortimentBlock2 = () => {
       <div className="max-w-screen-xl mx-auto w-full py-10 px-2">
         <AuroraText
         colors={["#8C2641", "#202614", "#838C64", "#545928"]}
-        className="text-4xl text-center md:text-5xl md:leading-[3.5rem] font-bold tracking-tight max-w-xl md:text-center md:mx-auto"
+        className="text-4xl md:text-5xl md:leading-[3.5rem] font-bold tracking-tight max-w-xl md:mx-auto"
         >
           Ассортимент
         </AuroraText>

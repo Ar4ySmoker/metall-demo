@@ -4,52 +4,43 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  BookCheck,
-  ChartPie,
-  FolderSync,
-  Goal,
-  Users,
-  Zap,
-} from "lucide-react";
 import Image from "next/image";
+import {
+  Truck,        // Для доставки
+  Ruler,        // Для резки в размер
+  PackageCheck, // Для ассортимента
+  HandCoins,    // Для цен и условий
+  Factory,      // Для поставок с заводов
+  ShieldCheck,  // Дополнительно — гарантия качества
+} from "lucide-react";
 
 const features = [
   {
-    icon: Goal,
-    title: "Identify Opportunities",
+    icon: PackageCheck, // Было Goal
+    title: "Широкий ассортимент",
     description:
-      "Easily uncover untapped areas to explore and expand your reach effortlessly and effectively.",
+      "Арматура, трубы, уголки, швеллеры, листы и прочий черный металлопрокат",
   },
   {
-    icon: BookCheck,
-    title: "Build Authority",
-    description:
-      "Create valuable content that resonates, inspires trust, and positions you as an expert.",
+    icon: Truck, // Было BookCheck
+    title: "Быстрая доставка",
+    description: "по Москве и МО — от 2 часов",
   },
   {
-    icon: ChartPie,
-    title: "Instant Insights",
-    description:
-      "Gain immediate, actionable insights with a quick glance, enabling fast decision-making.",
+    icon: Ruler, // Было ChartPie
+    title: "Резка в размер",
+    description: "под ваш проект",
   },
   {
-    icon: Users,
-    title: "Engage with Your Audience",
-    description:
-      "Boost audience engagement with interactive features like polls, quizzes, and forms.",
+    icon: HandCoins, // Было Users
+    title: "Честные цены и гибкие условия",
+    description: "опт, розница, без скрытых наценок",
   },
   {
-    icon: FolderSync,
-    title: "Automate Your Workflow",
+    icon: Factory, // Было FolderSync
+    title: "Прямые поставки с заводов-производителей",
     description:
-      "Streamline your processes by automating repetitive tasks, saving time and reducing effort.",
-  },
-  {
-    icon: Zap,
-    title: "Accelerate Growth",
-    description:
-      "Supercharge your growth by implementing strategies that drive results quickly and efficiently.",
+      "Северсталь, Евраз, Мечел, Санкт-Петербург, Казань, Ленинград, Пермь",
   },
 ];
 
@@ -58,7 +49,7 @@ const Delivery = () => {
     <div className="mt-10 flex items-center justify-center">
       <div className="max-w-screen-lg w-full py-12 px-6">
         <h2 className="text-xl md:text-3xl md:leading-[2rem] font-bold tracking-tight max-w-lg">
-          Партнёрская сеть и логистика поставок металлопроката
+          Что мы предлагаем:
         </h2>
         <div className="mt-6 md:mt-8 w-full mx-auto grid md:grid-cols-2 gap-12">
           <div>

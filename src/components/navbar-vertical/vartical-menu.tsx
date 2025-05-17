@@ -131,6 +131,7 @@ export const VerticalMenu = () => {
           </div>
         ))}
       </div>
+      {/* <div className="block bg-accent w-full h-[300px]"/> */}
     </div>
   );
 };
