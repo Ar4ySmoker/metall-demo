@@ -1,5 +1,4 @@
 import Avantages from "@/components/advantages";
-import { AnimatedListDemo } from "@/components/animatedList";
 import AsortimentBlock2 from "@/components/asortiment-block-2";
 import CarouselWithPagination from "@/components/carousel-06";
 import Contact02Page from "@/components/contact-02/contact-02";
@@ -27,7 +26,10 @@ export default function Home() {
       <Delivery />
       </DefaultLayout>
 <div className="max-w-screen-xl grid grid-cols-3 gap-5 mt-4 mx-auto px-4 sm:px-6 lg:px-8 xs:hidden">
-<AnimatedListDemo className="col-span-1 my-auto"/>
+    <div className="relative hidden md:block   w-full  overflow-hidden rounded-lg border p-20">
+ 
+      
+      </div>
 <div className="col-span-2">
 <StatsPage />
 </div>
