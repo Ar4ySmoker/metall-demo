@@ -8,7 +8,7 @@ import { NavigationMenuProps } from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 
 export const navItems = [
-  { name: "О компании", href: "/" },
+  { name: "О компании", href: "/o-kompanii" },
   { name: "Доставка", href: "/blog" },
   { name: "Оплата", href: "/about" },
   { name: "Прайс", href: "/contact" },
