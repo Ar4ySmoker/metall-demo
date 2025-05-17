@@ -6,7 +6,6 @@ import Contact02Page from "@/components/contact-02/contact-02";
 import Delivery from "@/components/delivery";
 import DefaultLayout from "@/components/layouts/defaultLayout";
 import LogosPage from "@/components/logos/logos";
-import ProductsCard from "@/components/productsCard";
 import StatsPage from "@/components/stats-02/stats-02";
 
 
@@ -35,14 +34,6 @@ export default function Home() {
 </div>
       <AsortimentBlock2 />
 
-      {/* <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-        <h3 className="text-2xl font-bold mb-6">Товары по акции</h3>
-        <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <ProductsCard />
-          <ProductsCard />
-          <ProductsCard />
-        </div>
-      </div> */}
 
       <LogosPage />
       <Avantages />

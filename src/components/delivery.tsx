@@ -11,33 +11,32 @@ import {
   PackageCheck, // Для ассортимента
   HandCoins,    // Для цен и условий
   Factory,      // Для поставок с заводов
-  ShieldCheck,  // Дополнительно — гарантия качества
 } from "lucide-react";
 
 const features = [
   {
-    icon: PackageCheck, // Было Goal
+    icon: PackageCheck, 
     title: "Широкий ассортимент",
     description:
       "Арматура, трубы, уголки, швеллеры, листы и прочий черный металлопрокат",
   },
   {
-    icon: Truck, // Было BookCheck
+    icon: Truck,
     title: "Быстрая доставка",
     description: "по Москве и МО — от 2 часов",
   },
   {
-    icon: Ruler, // Было ChartPie
+    icon: Ruler, 
     title: "Резка в размер",
     description: "под ваш проект",
   },
   {
-    icon: HandCoins, // Было Users
+    icon: HandCoins, 
     title: "Честные цены и гибкие условия",
     description: "опт, розница, без скрытых наценок",
   },
   {
-    icon: Factory, // Было FolderSync
+    icon: Factory, 
     title: "Прямые поставки с заводов-производителей",
     description:
       "Северсталь, Евраз, Мечел, Санкт-Петербург, Казань, Ленинград, Пермь",
